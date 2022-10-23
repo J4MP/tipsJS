@@ -24,3 +24,15 @@ tip1Button.addEventListener('click', () => {
     tip1.querySelector('p').textContent = color;
 });
 tip1.append(document.createElement('p'), tip1Button);
+
+const tip2 = createTip(2, 'Copy text into the clipboard 📋');
+const tip2Button = document.createElement('button');
+tip2Button.textContent = 'Copy text to clipboard';
+tip2Button.addEventListener('click', () => {
+    const textarea = tip2.querySelector('textarea');
+    const text = textarea.value;
+    textarea.value = '';
+    textarea.setAttribute('placeholder', 'Text copied');
+    tipJS.copyTextToClipboard(text);
+});
+tip2.append(document.createElement('textarea'), document.createElement('p'), tip2Button);
