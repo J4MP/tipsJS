@@ -1,0 +1,11 @@
+#tip1>div {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
