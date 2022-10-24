@@ -1,3 +1,11 @@
+.tip-title {
+    display: flex;
+}
+.navigator-icon {
+    width: 20px;
+    margin-left: 10px;
+}
+
 #tip1>div {
     width: 200px;
     height: 200px;
@@ -17,7 +25,7 @@
     align-items: center;
 }
 
-#tip3 img {
+#tip3>.tip-content>img {
     margin-top: 20px;
     width: 200px;
 }
