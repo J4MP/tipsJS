@@ -55,3 +55,14 @@ tip3Button.addEventListener('click', () => {
     tipJS.previewImage(tip3Img);
 });
 tip3.append(tip3Button, tip3Img);
+
+const tip4 = createTip(5, 'Load file CSV locally', ['chrome','firefox','edge']);
+const tip4Button = document.createElement('button');
+tip4Button.textContent = 'load CSV file';
+tip4Button.addEventListener('click', () => {
+    tipJS.loadLocalCSV('ISO-8859-1', true)
+    .then(res => {
+        console.log(res);
+    });
+});
+tip4.append(tip4Button);
