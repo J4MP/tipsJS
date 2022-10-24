@@ -1,4 +1,4 @@
-import tipJS from "./tipJS";
+import tipJS from "./tipJS.js";
 
 function createTip(numTip, titleTip) {
     const element = document.createElement('div');
@@ -36,3 +36,12 @@ tip2Button.addEventListener('click', () => {
     tipJS.copyTextToClipboard(text);
 });
 tip2.append(document.createElement('textarea'), document.createElement('p'), tip2Button);
+
+const tip3 = createTip(3, 'Preview image whitout server');
+const tip3Button = document.createElement('button');
+const tip3Img = document.createElement('img');
+tip3Button.textContent = 'Preview image';
+tip3Button.addEventListener('click', () => {
+    tipJS.previewImage(tip3Img);
+});
+tip3.append(tip3Button, tip3Img);

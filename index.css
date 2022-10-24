@@ -9,3 +9,15 @@
     justify-content: space-around;
     align-items: center;
 }
+
+#tip3>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#tip3 img {
+    margin-top: 20px;
+    width: 200px;
+}
