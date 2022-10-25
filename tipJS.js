@@ -79,6 +79,15 @@ export default {
             });
             cam.catch(function(err) { console.log(err.name); }); 
         })
-
-    }
+    },
+    setBearerAutHeader(token = '', type = 'application/json') {
+        const config = {
+            'Content-Type': type
+        };
+        if (token) {
+            config['Authorization'] = 'Bearer ' + token;
+        }
+        const headers = new Headers(config);
+        return headers;
+    },    
 }

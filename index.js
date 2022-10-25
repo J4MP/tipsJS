@@ -79,4 +79,14 @@ tip5Button.addEventListener('click', () => {
 });
 tip5.append(tip5Button, document.createElement('img'));
 
-window.tipJs = tipJS;
+const tip6 = createTip(6, 'Set header Authorization Bearer', ['chrome','firefox','edge']);
+const tip6Button = document.createElement('button');
+tip6Button.textContent = 'Set Bearer';
+tip6Button.addEventListener('click', () => {
+    const headers = tipJS.setBearerAutHeader('token secreto').entries();
+    for (let header of headers) {
+        console.log(header);
+    }
+});
+tip6.append(tip6Button, document.createElement('img'));
+
