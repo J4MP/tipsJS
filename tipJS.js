@@ -5,7 +5,7 @@ export default {
     copyTextToClipboard: (text) => {
         navigator.clipboard.writeText(text);
     },
-    previewImage(element) {
+    previewImage: (element) => {
         const inputFile = document.createElement('input');
         inputFile.setAttribute('type', 'file');
         inputFile.setAttribute('accept', 'image/*');
@@ -19,7 +19,7 @@ export default {
         })
         inputFile.click();
     },
-    loadLocalCSV(format = 'UTF-8', withHeader = false) {
+    loadLocalCSV: (format = 'UTF-8', withHeader = false) => {
         return new Promise((resolve, reject) => {
             const inputFile = document.createElement('input');
             inputFile.setAttribute('type', 'file');
@@ -27,8 +27,8 @@ export default {
             inputFile.addEventListener('change', () => {
                 const file = inputFile.files[0];
                 const fileReader  = new FileReader();
-                fileReader.onerror(err => reject(err));
-                fileReader.onload = function (e) {
+                fileReader.onerror = err => reject(err);
+                fileReader.onload = e => {
                     let data = [];
                     let headers = null;
                     const lines = e.target.result.split("\n");
@@ -59,7 +59,7 @@ export default {
             inputFile.click();
         });
     },
-    takeWebcamSelfie() {
+    takeWebcamSelfie: () => {
         const video = document.createElement('video');
         const canvas = document.createElement('canvas');
 
@@ -70,17 +70,19 @@ export default {
             cam.then(stream => {
                 video.srcObject = stream;
                 video.onloadedmetadata = function(e) {
-                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                    stream.getTracks().forEach(function(track) {
-                        track.stop();
-                    });
+                    canvas.getContext('2d')
+                        .drawImage(video, 0, 0, canvas.width, canvas.height);
+                    stream.getTracks()
+                        .forEach(function(track) {
+                            track.stop();
+                        });
                     resolve(canvas.toDataURL('image/jpeg'));                  };                
 
             });
             cam.catch(function(err) { console.log(err.name); }); 
         })
     },
-    setBearerAutHeader(token = '', type = 'application/json') {
+    setBearerAutHeader: (token = '', type = 'application/json') => {
         const config = {
             'Content-Type': type
         };

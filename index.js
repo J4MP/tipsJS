@@ -1,11 +1,14 @@
 import tipJS from "./tipJS.js";
 
-function createTip(numTip, titleTip, navigators = []) {
+function createTip(numTip, titleTip, navigators = [], codeScript = '') {
     const element = document.createElement('div');
     const content = document.createElement('div');
+    const code = document.createElement('div');
     const title = document.createElement('h3');
 
     element.classList.add('tip');
+    code.classList.add('code');
+    code.hidden = true;
     title.classList.add('tip-title');
     content.classList.add('tip-content');
     title.textContent = `#${numTip} ${titleTip}`;
@@ -18,15 +21,25 @@ function createTip(numTip, titleTip, navigators = []) {
         title.appendChild(icon);
     });
 
+    title.appendChild(document.createElement('code'));
+    title.querySelector('code').textContent = '<>';
+    title.querySelector('code').addEventListener('click', () => {
+        code.hidden = !code.hidden;
+    });
+
     element.appendChild(title);
     element.appendChild(content);
+    code.appendChild(document.createElement('code'));
+    code.querySelector('code').innerHTML = `<pre>${codeScript}</pre>`;
+
+    content.appendChild(code);
 
     document.body.appendChild(element);
 
     return content;
 }
 
-const tip1 = createTip(1, 'Generate random color in hexadecimal format', ['chrome','firefox','edge']);
+const tip1 = createTip(1, 'Generate random color in hexadecimal format', ['chrome','firefox','edge'], tipJS.gererateRandomColor);
 const tip1Button = document.createElement('button');
 tip1Button.textContent = 'Change color';
 tip1Button.addEventListener('click', () => {
@@ -36,7 +49,7 @@ tip1Button.addEventListener('click', () => {
 });
 tip1.append(document.createElement('p'), tip1Button);
 
-const tip2 = createTip(2, 'Copy text into the clipboard', ['chrome','firefox','edge']);
+const tip2 = createTip(2, 'Copy text into the clipboard', ['chrome','firefox','edge'], tipJS.copyTextToClipboard);
 const tip2Button = document.createElement('button');
 tip2Button.textContent = 'Copy text to clipboard';
 tip2Button.addEventListener('click', () => {
@@ -48,7 +61,7 @@ tip2Button.addEventListener('click', () => {
 });
 tip2.append(document.createElement('textarea'), document.createElement('p'), tip2Button);
 
-const tip3 = createTip(3, 'Preview image locally (no server)', ['chrome','firefox','edge']);
+const tip3 = createTip(3, 'Preview image locally (no server)', ['chrome','firefox','edge'], tipJS.previewImage);
 const tip3Button = document.createElement('button');
 const tip3Img = document.createElement('img');
 tip3Button.textContent = 'Preview image';
@@ -57,18 +70,18 @@ tip3Button.addEventListener('click', () => {
 });
 tip3.append(tip3Button, tip3Img);
 
-const tip4 = createTip(4, 'Load file CSV locally (no server)', ['chrome','firefox','edge']);
+const tip4 = createTip(4, 'Load file CSV locally (no server)', ['chrome','firefox','edge'], tipJS.loadLocalCSV);
 const tip4Button = document.createElement('button');
 tip4Button.textContent = 'load CSV file';
 tip4Button.addEventListener('click', () => {
     tipJS.loadLocalCSV('ISO-8859-1', true)
     .then(res => {
-        console.log(res);
+        console.table(res);
     });
 });
 tip4.append(tip4Button);
 
-const tip5 = createTip(5, 'Take a selfie from WebCam', ['chrome','firefox','edge']);
+const tip5 = createTip(5, 'Take a selfie from WebCam', ['chrome','firefox','edge'], tipJS.takeWebcamSelfie);
 const tip5Button = document.createElement('button');
 tip5Button.textContent = 'Take a selfie';
 tip5Button.addEventListener('click', () => {
@@ -79,7 +92,7 @@ tip5Button.addEventListener('click', () => {
 });
 tip5.append(tip5Button, document.createElement('img'));
 
-const tip6 = createTip(6, 'Set header Authorization Bearer', ['chrome','firefox','edge']);
+const tip6 = createTip(6, 'Set header Authorization Bearer', ['chrome','firefox','edge'], tipJS.setBearerAutHeader);
 const tip6Button = document.createElement('button');
 tip6Button.textContent = 'Set Bearer';
 tip6Button.addEventListener('click', () => {
@@ -89,4 +102,3 @@ tip6Button.addEventListener('click', () => {
     }
 });
 tip6.append(tip6Button, document.createElement('img'));
-
