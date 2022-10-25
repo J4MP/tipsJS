@@ -72,6 +72,8 @@ tip3.append(tip3Button, tip3Img);
 
 const tip4 = createTip(4, 'Load file CSV locally (no server)', ['chrome','firefox','edge'], tipJS.loadLocalCSV);
 const tip4Button = document.createElement('button');
+const info4 = document.createElement('p');
+info4.textContent = 'Open the browser console to see the result.';
 tip4Button.textContent = 'load CSV file';
 tip4Button.addEventListener('click', () => {
     tipJS.loadLocalCSV('ISO-8859-1', true)
@@ -79,7 +81,7 @@ tip4Button.addEventListener('click', () => {
         console.table(res);
     });
 });
-tip4.append(tip4Button);
+tip4.append(info4,tip4Button);
 
 const tip5 = createTip(5, 'Take a selfie from WebCam', ['chrome','firefox','edge'], tipJS.takeWebcamSelfie);
 const tip5Button = document.createElement('button');
@@ -94,6 +96,8 @@ tip5.append(tip5Button, document.createElement('img'));
 
 const tip6 = createTip(6, 'Set header Authorization Bearer', ['chrome','firefox','edge'], tipJS.setBearerAutHeader);
 const tip6Button = document.createElement('button');
+const info6 = document.createElement('p');
+info6.textContent = 'Open the browser console to see the result.';
 tip6Button.textContent = 'Set Bearer';
 tip6Button.addEventListener('click', () => {
     const headers = tipJS.setBearerAutHeader('token secreto').entries();
@@ -101,4 +105,4 @@ tip6Button.addEventListener('click', () => {
         console.log(header);
     }
 });
-tip6.append(tip6Button, document.createElement('img'));
+tip6.append(info6, tip6Button);

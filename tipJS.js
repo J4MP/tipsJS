@@ -72,12 +72,11 @@ export default {
                 video.onloadedmetadata = function(e) {
                     canvas.getContext('2d')
                         .drawImage(video, 0, 0, canvas.width, canvas.height);
-                    stream.getTracks()
-                        .forEach(function(track) {
+                    stream.getTracks().forEach(function(track) {
                             track.stop();
                         });
-                    resolve(canvas.toDataURL('image/jpeg'));                  };                
-
+                    resolve(canvas.toDataURL('image/jpeg'));                  
+                };                
             });
             cam.catch(function(err) { console.log(err.name); }); 
         })
@@ -89,7 +88,6 @@ export default {
         if (token) {
             config['Authorization'] = 'Bearer ' + token;
         }
-        const headers = new Headers(config);
-        return headers;
+        return new Headers(config);
     },    
 }
