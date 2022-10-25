@@ -51,7 +51,6 @@ export default {
                             }
                         }
                     });
-                    const header = lines[0].split(';');
                     resolve(data);
                 };
                 fileReader.readAsText(file, format);
@@ -89,5 +88,9 @@ export default {
             config['Authorization'] = 'Bearer ' + token;
         }
         return new Headers(config);
-    },    
+    },
+    form2json: (formElement) => {
+        const data = new FormData(formElement);
+        return JSON.stringify(Object.fromEntries(data.entries()));
+    }    
 }

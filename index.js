@@ -106,3 +106,23 @@ tip6Button.addEventListener('click', () => {
     }
 });
 tip6.append(info6, tip6Button);
+
+const tip7 = createTip(7, 'Convert HTML form in JSON string', ['chrome','firefox','edge'], tipJS.form2json);
+const tip7Button = document.createElement('button');
+const info7 = document.createElement('p');
+const form7 = document.createElement('form');
+form7.innerHTML = `
+    Name: <input type="text" name="name"><br>
+    Password: <input type="password" name="pass"><br>
+    Languaje:<select name="lang">
+        <option value="-"></option>
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+    </select>
+`;
+tip7Button.textContent = 'Convert';
+tip7Button.addEventListener('click', () => {
+    info7.textContent = tipJS.form2json(form7);
+});
+tip7.append(form7, tip7Button, info7);
