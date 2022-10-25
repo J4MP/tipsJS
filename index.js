@@ -5,6 +5,7 @@ function createTip(numTip, titleTip, navigators = []) {
     const content = document.createElement('div');
     const title = document.createElement('h3');
 
+    element.classList.add('tip');
     title.classList.add('tip-title');
     content.classList.add('tip-content');
     title.textContent = `#${numTip} ${titleTip}`;
@@ -47,7 +48,7 @@ tip2Button.addEventListener('click', () => {
 });
 tip2.append(document.createElement('textarea'), document.createElement('p'), tip2Button);
 
-const tip3 = createTip(3, 'Preview image whitout server', ['chrome','firefox','edge']);
+const tip3 = createTip(3, 'Preview image locally (no server)', ['chrome','firefox','edge']);
 const tip3Button = document.createElement('button');
 const tip3Img = document.createElement('img');
 tip3Button.textContent = 'Preview image';
@@ -56,7 +57,7 @@ tip3Button.addEventListener('click', () => {
 });
 tip3.append(tip3Button, tip3Img);
 
-const tip4 = createTip(5, 'Load file CSV locally', ['chrome','firefox','edge']);
+const tip4 = createTip(4, 'Load file CSV locally (no server)', ['chrome','firefox','edge']);
 const tip4Button = document.createElement('button');
 tip4Button.textContent = 'load CSV file';
 tip4Button.addEventListener('click', () => {
@@ -66,3 +67,16 @@ tip4Button.addEventListener('click', () => {
     });
 });
 tip4.append(tip4Button);
+
+const tip5 = createTip(5, 'Take a selfie from WebCam', ['chrome','firefox','edge']);
+const tip5Button = document.createElement('button');
+tip5Button.textContent = 'Take a selfie';
+tip5Button.addEventListener('click', () => {
+    tipJS.takeWebcamSelfie()
+    .then(image => {
+        tip5.querySelector('img').setAttribute('src', image);
+    });
+});
+tip5.append(tip5Button, document.createElement('img'));
+
+window.tipJs = tipJS;

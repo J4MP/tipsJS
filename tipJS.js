@@ -27,6 +27,7 @@ export default {
             inputFile.addEventListener('change', () => {
                 const file = inputFile.files[0];
                 const fileReader  = new FileReader();
+                fileReader.onerror(err => reject(err));
                 fileReader.onload = function (e) {
                     let data = [];
                     let headers = null;
@@ -57,5 +58,27 @@ export default {
             })
             inputFile.click();
         });
+    },
+    takeWebcamSelfie() {
+        const video = document.createElement('video');
+        const canvas = document.createElement('canvas');
+
+        video.setAttribute('autoplay', true);
+
+        return new Promise((resolve, reject) => {            
+            const cam = navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            cam.then(stream => {
+                video.srcObject = stream;
+                video.onloadedmetadata = function(e) {
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    resolve(canvas.toDataURL('image/jpeg'));                  };                
+
+            });
+            cam.catch(function(err) { console.log(err.name); }); 
+        })
+
     }
 }
