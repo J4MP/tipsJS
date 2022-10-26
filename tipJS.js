@@ -61,12 +61,16 @@ export default {
     takeWebcamSelfie: () => {
         const video = document.createElement('video');
         const canvas = document.createElement('canvas');
-
         video.setAttribute('autoplay', true);
 
         return new Promise((resolve, reject) => {            
             const cam = navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             cam.then(stream => {
+                let stream_settings = stream.getVideoTracks()[0].getSettings();
+                video.style.width = stream_settings.width + 'px';
+                canvas.setAttribute('width', stream_settings.width);
+                video.style.height = stream_settings.height + 'px';
+                canvas.setAttribute('height', stream_settings.height);
                 video.srcObject = stream;
                 video.onloadedmetadata = function(e) {
                     canvas.getContext('2d')
@@ -76,8 +80,8 @@ export default {
                         });
                     resolve(canvas.toDataURL('image/jpeg'));                  
                 };                
-            });
-            cam.catch(function(err) { console.log(err.name); }); 
+            })
+            .catch(function(err) { console.log(err.name); }); 
         })
     },
     setBearerAutHeader: (token = '', type = 'application/json') => {
@@ -92,5 +96,30 @@ export default {
     form2json: (formElement) => {
         const data = new FormData(formElement);
         return JSON.stringify(Object.fromEntries(data.entries()));
-    }    
+    },
+    screenCapture: (cursor = true) => {
+        const video = document.createElement('video');
+        const canvas = document.createElement('canvas');
+        video.setAttribute('autoplay', true);
+
+        return new Promise((resolve, reject) => {            
+            const cam = navigator.mediaDevices.getDisplayMedia({ video: {cursor}, audio: false });
+            cam.then(stream => {
+                let stream_settings = stream.getVideoTracks()[0].getSettings();
+                video.style.width = stream_settings.width + 'px';
+                canvas.setAttribute('width', stream_settings.width);
+                video.style.height = stream_settings.height + 'px';
+                canvas.setAttribute('height', stream_settings.height);
+                video.srcObject = stream;
+                video.onloadedmetadata = function(e) {
+                    canvas.getContext('2d')
+                        .drawImage(video, 0, 0, canvas.width, canvas.height);
+                    stream.getTracks().forEach(function(track) {
+                            track.stop();
+                        });
+                    resolve(canvas.toDataURL('image/jpeg'));                  
+                };                
+            })
+            .catch(function(err) { console.log(err.name); }); 
+        })   }    
 }

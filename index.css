@@ -95,7 +95,7 @@ body {
     width: 200px;
 }
 
-#tip5 .tip-content>img {
+#tip5 .tip-content>img, #tip8 .tip-content>img {
     margin-top: 20px;
     width: 100%;
 }

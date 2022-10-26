@@ -126,3 +126,14 @@ tip7Button.addEventListener('click', () => {
     info7.textContent = tipJS.form2json(form7);
 });
 tip7.append(form7, tip7Button, info7);
+
+const tip8 = createTip(8, 'Capture screen', ['chrome','edge','opera'], tipJS.screenCapture);
+const tip8Button = document.createElement('button');
+tip8Button.textContent = 'Capture';
+tip8Button.addEventListener('click', () => {
+    tipJS.screenCapture()
+    .then(image => {
+        tip8.querySelector('img').setAttribute('src', image);
+    });
+});
+tip8.append(tip8Button, document.createElement('img'));
