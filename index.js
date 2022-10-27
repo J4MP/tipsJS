@@ -139,7 +139,7 @@ tip8Button.addEventListener('click', () => {
 tip8.append(tip8Button, document.createElement('img'));
 
 const tip9 = createTip(9, 'Get URL params', ['chrome','edge', 'firefox','opera','safari'], tipJS.getParamsFromURL);
-const info9 = document.createElement('p');
+const info9 = document.createElement('div');
 const tip9Button = document.createElement('button');
 tip9Button.textContent = 'Get params';
 tip9Button.addEventListener('click', () => {
@@ -154,3 +154,14 @@ tip9Button.addEventListener('click', () => {
     }
 });
 tip9.append(tip9Button, info9);
+
+const tip10 = createTip(10, 'Get user divice', ['chrome','edge', 'firefox','opera','safari'], tipJS.getUserDevice);
+const info10 = document.createElement('h2');
+info10.style.margin = '20px';
+info10.style.textAlign = 'center';
+const tip10Button = document.createElement('button');
+tip10Button.textContent = 'Get device';
+tip10Button.addEventListener('click', () => {
+    info10.textContent = `You are using a ${tipJS.getUserDevice()} device`;
+});
+tip10.append(tip10Button, info10);
