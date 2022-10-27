@@ -137,3 +137,20 @@ tip8Button.addEventListener('click', () => {
     });
 });
 tip8.append(tip8Button, document.createElement('img'));
+
+const tip9 = createTip(9, 'Get URL params', ['chrome','edge', 'firefox','opera','safari'], tipJS.getParamsFromURL);
+const info9 = document.createElement('p');
+const tip9Button = document.createElement('button');
+tip9Button.textContent = 'Get params';
+tip9Button.addEventListener('click', () => {
+    const params = tipJS.getParamsFromURL();
+    if (Object.keys(params).length === 0) {
+        info9.innerHTML = '<p>The URL contains no parameters</p>';
+    } else {
+        info9.innerHTML = '';
+        for (const param in params) {
+            info9.innerHTML += `<p>${param} = ${params[param]}`;
+        }
+    }
+});
+tip9.append(tip9Button, info9);

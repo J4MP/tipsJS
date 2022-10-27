@@ -121,5 +121,18 @@ export default {
                 };                
             })
             .catch(function(err) { console.log(err.name); }); 
-        })   }    
+        })  
+    },
+    getParamsFromURL: (param = null) => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if (param) {
+            return urlParams.get(param);
+        }
+        const params = {};
+        urlParams.forEach( (value, key) => {
+            params[key] = value;
+        });
+        return params;
+    }    
 }
