@@ -197,4 +197,12 @@ export default {
       },
     };
   },
+  sendDataOnHiddeWindow: (url, data) => {
+    var blob = new Blob([data], { type: "application/json" });
+    document.addEventListener('visibilitychange', function logData() {
+        if (document.visibilityState === 'hidden') {
+          navigator.sendBeacon(url, blob);
+        }
+      });
+  }
 };

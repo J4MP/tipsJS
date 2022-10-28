@@ -155,7 +155,7 @@ tip9Button.addEventListener('click', () => {
 });
 tip9.append(tip9Button, info9);
 
-const tip10 = createTip(10, 'Get user divice', ['chrome','edge', 'firefox','opera','safari'], tipJS.getUserDevice);
+const tip10 = createTip(10, 'Get user device', ['chrome','edge', 'firefox','opera','safari'], tipJS.getUserDevice);
 const info10 = document.createElement('h2');
 info10.style.margin = '20px';
 info10.style.textAlign = 'center';
@@ -189,3 +189,18 @@ tip11StopButton.addEventListener('click', () => {
 });
 tip11Headeer.append(tip11StartButton, info11, tip11StopButton);
 tip11.append(tip11Headeer);
+
+const tip12 = createTip(12, 'Sending analytics data in JSON format at the end of a session', ['chrome','edge', 'firefox','opera','safari'], tipJS.sendDataOnHiddeWindow);
+const tip12input = document.createElement('input');
+tip12input.value = '{"name": "test", "seconds": 25}';
+tip12input.style.width = '100%';
+tip12input.style.padding = '3px 5px';
+tip12input.style.marginBottom = '10px';
+const tip212info = document.createElement('p');
+tip212info.textContent = 'Open the browser console with the \'network\' tab active and change the browser tab or minimize it to see the data sent.';
+const tip12Button = document.createElement('button');
+tip12Button.textContent = 'Set data to send';
+tip12Button.addEventListener('click', () => {
+    tipJS.sendDataOnHiddeWindow('prueba.php', tip12input.value)
+});
+tip12.append(tip12input, tip12Button, tip212info);
