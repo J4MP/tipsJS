@@ -226,6 +226,19 @@ export default {
             });
         }
     })
-  
-  }
+  },
+  speak: (text, voice = null, rate = 1, pitch = 1, volume = 1, lang = "EN") => {
+    setTimeout(() => {
+      let speakData = new SpeechSynthesisUtterance();
+      let voices;
+      voices = window.speechSynthesis.getVoices();
+      speakData.volume = volume < 0 ? 0 : volume > 1 ? 1 : volume;
+      speakData.rate = rate < 0.1 ? 0.1 : rate > 10 ? 10 : rate;
+      speakData.pitch = pitch < 0 ? 0 : pitch > 2 ? 2 : pitch;
+      speakData.text = text;
+      speakData.lang = lang;
+      speakData.voice = voice || voices[0];
+      speechSynthesis.speak(speakData);
+    }, 0);
+  },
 };

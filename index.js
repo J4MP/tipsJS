@@ -223,3 +223,12 @@ tip13Button.addEventListener('click', () => {
     });
 });
 tip13.append( tip13Button, tip13info);
+
+const tip14 = createTip(14, 'Text to speech', ['chrome','edge', 'firefox','opera','safari'], tipJS.speak);
+const tip14Button = document.createElement('button');
+const tip14input = document.createElement('input');
+tip14Button.textContent = 'Speak';
+tip14Button.addEventListener('click', () => {
+    tipJS.speak(tip14input.value);
+});
+tip14.append(tip14input, tip14Button);
