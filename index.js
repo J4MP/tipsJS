@@ -165,3 +165,27 @@ tip10Button.addEventListener('click', () => {
     info10.textContent = `You are using a ${tipJS.getUserDevice()} device`;
 });
 tip10.append(tip10Button, info10);
+
+const tip11 = createTip(11, 'Audio recorder', ['chrome','edge', 'firefox','opera','safari'], tipJS.audioRecorder);
+const tip11Headeer = document.createElement('div');
+const tip11StartButton = document.createElement('button');
+const tip11StopButton = document.createElement('button');
+const info11 = document.createElement('h2');
+tip11Headeer.style.display = 'flex';
+info11.style.margin = '0px';
+info11.style.flex = '0 0 150px';
+info11.style.textAlign = 'center';
+info11.style.color = 'red';
+let audioRecorder = tipJS.audioRecorder(tip11);
+tip11StartButton.textContent = 'Star';
+tip11StopButton.textContent = 'Stop';
+tip11StartButton.addEventListener('click', () => {
+    audioRecorder.star();
+    info11.textContent = 'Recording';
+});
+tip11StopButton.addEventListener('click', () => {
+    audioRecorder.stop();
+    info11.textContent = '';
+});
+tip11Headeer.append(tip11StartButton, info11, tip11StopButton);
+tip11.append(tip11Headeer);
