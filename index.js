@@ -204,3 +204,22 @@ tip12Button.addEventListener('click', () => {
     tipJS.sendDataOnHiddeWindow('prueba.php', tip12input.value)
 });
 tip12.append(tip12input, tip12Button, tip212info);
+
+const tip13 = createTip(13, 'Get my location', ['chrome','edge', 'firefox','opera','safari'], tipJS.getGeoPosition);
+const tip13info = document.createElement('p');
+const tip13Button = document.createElement('button');
+tip13Button.textContent = 'Show my location';
+tip13Button.addEventListener('click', () => {
+    tipJS.getGeoPosition(true).
+    then(res => {
+        const a = document.createElement('a');
+        a.href = res.link;
+        a.target = '_blank';
+        a.textContent = `Latitude: ${res.latitude} °, Longitude: ${res.longitude} °`;
+        tip13.append(a);
+    })
+    .catch(err => {
+        tip13info.textContent = err;
+    });
+});
+tip13.append( tip13Button, tip13info);

@@ -177,13 +177,13 @@ export default {
             audioChunks.push(event.data);
           });
           mediaRecorder.addEventListener("stop", () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
             const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = document.createElement('audio');
-            audio.setAttribute('src', audioUrl);
+            const audio = document.createElement("audio");
+            audio.setAttribute("src", audioUrl);
             if (element) {
-                audio.setAttribute('controls', 'controls');
-                element.append(audio);
+              audio.setAttribute("controls", "controls");
+              element.append(audio);
             }
             audio.play();
           });
@@ -199,10 +199,33 @@ export default {
   },
   sendDataOnHiddeWindow: (url, data) => {
     var blob = new Blob([data], { type: "application/json" });
-    document.addEventListener('visibilitychange', function logData() {
-        if (document.visibilityState === 'hidden') {
-          navigator.sendBeacon(url, blob);
+    document.addEventListener("visibilitychange", function logData() {
+      if (document.visibilityState === "hidden") {
+        navigator.sendBeacon(url, blob);
+      }
+    });
+  },
+  getGeoPosition(withMapLink = false) {
+    return new Promise((resolve, reject) => {        
+        if (!navigator.geolocation) {
+          reject('Geolocation is not supported by your browser');
+        } else {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const response = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                }
+                if (withMapLink) {
+                    response.link = `https://www.openstreetmap.org/#map=18/${response.latitude}/${response.longitude}`
+                }
+                resolve(response);
+            }, 
+            () => {
+                reject('Unable to retrieve your location');
+            });
         }
-      });
+    })
+  
   }
 };
